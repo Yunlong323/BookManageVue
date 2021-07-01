@@ -50,42 +50,28 @@ export default{
     };
   },
   methods: {
-    register() {
-      console.log("响应")
+   register() {
+
+     this.$router.push('/register');
+
+     
       
     },
-    login() {
-    
+    login() {    
       this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) {
-          
+        if (!valid) {          
           return;
         }
-        // 调用get请求
-
-        this.$message.success("登陆成功！！！");
-           this.$router.push({ path: "/Home"});
-
-    
-        // const {data :res} = await this.$http.post("login", this.loginForm);
-   
-        // //没有后台await之后的都没办法执行
-        //  if (res == "ok" ) {
-
-              
-        //    window.sessionStorage.setItem('flag','ok'); // session 放置
-        //   window.sessionStorage.setItem('user',res.user);//session存储user对象 
-
-
-        //    this.$message.success("登陆成功！！！");
-        //    this.$router.push({ path: "/Home"});
-
-
-
-        //  }else{
-     
-        //   this.$message.error("登录失败！！！");
-        //  }
+          const {data :res} = await this.$http.post("test", this.loginForm);         
+        //没有后台await之后的都没办法执行
+         if (res == "ok" ) {              
+           window.sessionStorage.setItem('flag','ok'); // session 放置
+          window.sessionStorage.setItem('user',res.user);//session存储user对象          
+           this.$message.success("登陆成功！！！");//操作成功，出现element UI成功提示框
+           this.$router.push({ path: "/Home"});//跳转
+         }else{     
+          this.$message.error("登录失败！！！");//操作失败，出现element UI失败提示框
+         }
       });
 
 
