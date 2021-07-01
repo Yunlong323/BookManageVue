@@ -55,7 +55,7 @@ export default{
       
     },
     login() {
-      console.log("开始登录")
+    
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) {
           

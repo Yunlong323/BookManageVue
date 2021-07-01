@@ -2,23 +2,48 @@
 
   <el-container class="home-container">
         <el-header>
-
             <div>
             <img src="../assets/logo.jpg" alt class="logo_img" />
               <span >图书管理平台</span>
-            </div>
-                
-                
+            </div>                            
          <el-button type="info" @click="logout">安全退出</el-button>
-            
-        
-    
         </el-header>
-
-
         <el-container>
-            <el-aside width="200px">Aside</el-aside>
+
+            
+
+
+
+
+
+
+
+<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-menu :default-openeds="['1', '3']">
+      <el-submenu index="1">
+        <template slot="title"><i class="el-icon-message"></i>导航</template>
+        <el-menu-item-group>
+ 
+          <el-menu-item index="1-1">首页</el-menu-item>
+          <el-menu-item index="1-2">图书管理</el-menu-item>
+            <el-menu-item index="1-3">用户管理</el-menu-item>
+            <el-menu-item index="1-4">借阅管理</el-menu-item>
+           <el-menu-item index="1-4">个人信息</el-menu-item>
+        </el-menu-item-group>
+      
+       
+      </el-submenu>
+      
+    </el-menu>
+  </el-aside>
+
+
+
+    
+
             <el-main>Main</el-main>
+
+
         </el-container>
 
 </el-container>
@@ -27,13 +52,47 @@
 
 <script>
 export default{
-    
+    data(){
 
+      return{
+        iscollapse:false,
+        menuList:[
+          //菜单列表 create()加载页面的时候去查询
+
+        ],
+
+      }
+    },    
+    //就是onload  
+    created(){
+        this.getMenuList(); //后面可以根据MenuLisrt的逻辑来选择性的展示 
+    },
     methods:{
         logout() {
       window.sessionStorage.clear();
       this.$router.push("/Login");
-    }
+    },
+    toggleCollapase(){
+      this.iscollapse = !this.isCollapase;
+    },
+
+    getMenuList(){//  需要先去完善后台的支持，this.$http.get()来获取后台的/menus接口  所以后续要加个async
+      console.log("需要完善的功能");
+    },
+
+    // //获取导航菜单的方法
+    //  async getMenuList(){//  需要先去完善后台的支持，this.$http.get()来获取后台的/menus接口  所以后续要加个async
+    //   const {data:res} = await this.$http.get("/menus");
+    //   console.log(res);
+
+    //     if (res.flag!=200) return this.$message.error("获取列表失败");
+    //   //正常取出，把取出来的menu填入到咱们的menuList里面，让他去显示前端的页面
+
+    //     this.menuList = res.menus;//这里需要跟后台约定json格式是 flag + menus
+    // },
+
+
+
     }
 }
 </script>
@@ -86,6 +145,15 @@ justify-content: space-between;
     text-align: center;
     line-height: 160px;
   } 
+  .toggle-button{
+     background-color:#4A5064;
+  font-size: 10px;
+  line-height: 24px;
+  color:#fff;
+     text-align: center;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  }
 
 
 </style>
