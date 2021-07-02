@@ -14,16 +14,22 @@
         label-width="0px"
       >
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="iconfont icondenglu"></el-input>
+          <el-input v-model="loginForm.userTel" prefix-icon="iconfont icondenglu"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="iconfont iconmima" type="password"></el-input>
+          <el-input v-model="loginForm.userPassword" prefix-icon="iconfont iconmima" type="password"></el-input>
         </el-form-item>
+
+          <div class="RadioBox">
+        
+      
+        
         <el-form-item class="btns">
           <el-button type="primary" @click="login">登录</el-button>
           
            <el-button type="info" @click="register">注册</el-button>
         </el-form-item>
+            </div>
       </el-form>
     </div>
   </div>
@@ -34,15 +40,19 @@ export default{
      data() {
     return {
       loginForm: {
-        username: "admin",
-        password: "123456"
+        userId:"",
+        userName: "admin",
+        userTel:"",
+        userEmail:"",
+        userPassword: "123456",
+        identity: ""
       },      
       loginRules: {
-        username: [
+        userTel: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 5, max: 8, message: "长度在 5 到 8 个字符", trigger: "blur" }
         ],
-        password: [
+        userPassword: [
           { required: true, message: "请输入密码", trigger: "blur" },
           { min: 6, max: 8, message: "密码为 6~8 位", trigger: "blur" }
         ]
@@ -62,9 +72,17 @@ export default{
         if (!valid) {          
           return;
         }
-          const {data :res} = await this.$http.post("test", this.loginForm);         
+          
+          console.log("这里是要向接口传递的数据：")
+        console.log(this.loginForm)
+  
+
+          const {data :res} = await this.$http.post("/user/login", this.loginForm);    //把data里的loginForm对象传递到login接口（作为函数的参数）     
         //没有后台await之后的都没办法执行
-         if (res == "ok" ) {              
+
+              console.log(res)
+
+         if (res== true ) {              
            window.sessionStorage.setItem('flag','ok'); // session 放置
           window.sessionStorage.setItem('user',res.user);//session存储user对象          
            this.$message.success("登陆成功！！！");//操作成功，出现element UI成功提示框
@@ -82,6 +100,9 @@ export default{
 </script>
 
 <style lang="less" scope>
+.RadioBox{
+
+}
 
 // 跟节点样式
 .login_container {

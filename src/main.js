@@ -10,7 +10,7 @@ import axios from 'axios'
 // 挂载axios 到Vue的原型prototype的$http
 Vue.prototype.$http = axios
 
-axios.defaults.baseURL = "http://localhost:9000/"
+axios.defaults.baseURL = "http://localhost:8181/"
 
 axios.interceptors.request.use(config => {
   console.log(config);

@@ -8,16 +8,7 @@
             </div>                            
          <el-button type="info" @click="logout">安全退出</el-button>
         </el-header>
-        <el-container>
-
-            
-
-
-
-
-
-
-
+        <el-container>        
 <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
     <el-menu :default-openeds="['1', '3']">
       <el-submenu index="1">
@@ -58,7 +49,7 @@ export default{
         iscollapse:false,
         menuList:[
           //菜单列表 create()加载页面的时候去查询
-
+          
         ],
 
       }
